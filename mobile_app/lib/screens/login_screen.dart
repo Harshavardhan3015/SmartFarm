@@ -1,70 +1,79 @@
 import 'package:flutter/material.dart';
+import '../services/auth_service.dart';
 import 'signup_screen.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   final bool isAdmin;
 
   const LoginScreen({super.key, required this.isAdmin});
 
   @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  bool _loading = false;
+
+  Future<void> _handleLogin() async {
+    setState(() => _loading = true);
+
+    final success = await AuthService.login(
+      _usernameController.text.trim(),
+      _passwordController.text.trim(),
+    );
+
+    setState(() => _loading = false);
+
+    if (success) {
+      Navigator.pushReplacementNamed(context, '/');
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Invalid credentials")),
+      );
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(isAdmin ? 'Admin Login' : 'User Login'),
+        title: Text(widget.isAdmin ? 'Admin Login' : 'User Login'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(24),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(
-              isAdmin ? Icons.admin_panel_settings : Icons.person,
-              size: 80,
-              color: Colors.green,
-            ),
-
-            const SizedBox(height: 20),
-
-            Text(
-              isAdmin ? 'Admin Portal' : 'Welcome Back',
-              style: const TextStyle(
-                fontSize: 22,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-
-            const SizedBox(height: 30),
-
             TextField(
+              controller: _usernameController,
               decoration: const InputDecoration(
                 labelText: 'Username',
                 border: OutlineInputBorder(),
               ),
             ),
-
             const SizedBox(height: 15),
-
             TextField(
+              controller: _passwordController,
               obscureText: true,
               decoration: const InputDecoration(
                 labelText: 'Password',
                 border: OutlineInputBorder(),
               ),
             ),
-
             const SizedBox(height: 25),
-
             ElevatedButton(
-              onPressed: () {
-                // Django auth API call later
-              },
+              onPressed: _loading ? null : _handleLogin,
               style: ElevatedButton.styleFrom(
                 minimumSize: const Size(double.infinity, 50),
               ),
-              child: const Text('Login'),
+              child: _loading
+                  ? const CircularProgressIndicator(color: Colors.white)
+                  : const Text('Login'),
             ),
-
-            if (!isAdmin) ...[
+            if (!widget.isAdmin) ...[
               const SizedBox(height: 15),
               TextButton(
                 onPressed: () {

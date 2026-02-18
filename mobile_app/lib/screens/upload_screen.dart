@@ -1,55 +1,66 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import '../services/upload_service.dart';
 import '../routes/app_routes.dart';
 
-class UploadScreen extends StatelessWidget {
+class UploadScreen extends StatefulWidget {
   const UploadScreen({super.key});
+
+  @override
+  State<UploadScreen> createState() => _UploadScreenState();
+}
+
+class _UploadScreenState extends State<UploadScreen> {
+  final ImagePicker _picker = ImagePicker();
+  bool _loading = false;
+
+  Future<void> _pickImage(ImageSource source) async {
+    final XFile? picked = await _picker.pickImage(source: source);
+
+    if (picked == null) return;
+
+    setState(() => _loading = true);
+
+    final result =
+        await UploadService.uploadAndInfer(File(picked.path));
+
+    setState(() => _loading = false);
+
+    if (result != null) {
+      Navigator.pushNamed(
+        context,
+        AppRoutes.result,
+        arguments: result,
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Upload failed")),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Upload Plant Image'),
-        elevation: 0,
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Icon(Icons.image_outlined, size: 120, color: Colors.green),
-            const SizedBox(height: 20),
-            const Text(
-              'Upload a plant image for analysis',
-              textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 18),
-            ),
-            const SizedBox(height: 30),
-
-            ElevatedButton.icon(
-              onPressed: () {
-                Navigator.pushNamed(context, AppRoutes.result);
-              },
-              icon: const Icon(Icons.photo_library),
-              label: const Text('Choose from Gallery'),
-              style: ElevatedButton.styleFrom(
-                minimumSize: const Size(double.infinity, 50),
+      appBar: AppBar(title: const Text('Upload Plant Image')),
+      body: Center(
+        child: _loading
+            ? const CircularProgressIndicator()
+            : Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ElevatedButton(
+                    onPressed: () => _pickImage(ImageSource.gallery),
+                    child: const Text("Choose from Gallery"),
+                  ),
+                  const SizedBox(height: 15),
+                  ElevatedButton(
+                    onPressed: () => _pickImage(ImageSource.camera),
+                    child: const Text("Open Camera"),
+                  ),
+                ],
               ),
-            ),
-
-            const SizedBox(height: 15),
-
-            ElevatedButton.icon(
-              onPressed: () {
-                Navigator.pushNamed(context, AppRoutes.result);
-              },
-              icon: const Icon(Icons.camera_alt),
-              label: const Text('Open Camera'),
-              style: ElevatedButton.styleFrom(
-                minimumSize: const Size(double.infinity, 50),
-              ),
-            ),
-          ],
-        ),
       ),
     );
   }
