@@ -1,8 +1,8 @@
-# 🌱 Smart Farming Mobile Application
+# 🌱 Smart Farm
 
 ## 📌 Project Overview
 
-Smart Farming is a mobile-based agricultural assistance system designed to help farmers monitor crop health, detect plant diseases, receive treatment recommendations, and access agricultural marketplace services.
+**Smart Farm** is a mobile-based agricultural assistance system designed to help farmers *monitor crop health, detect plant diseases, receive treatment recommendations, and access agricultural marketplace services*.
 
 The system follows a clean and scalable architecture:
 
@@ -14,13 +14,13 @@ The system follows a clean and scalable architecture:
 ---
 
 # 🏗️ Project Structure
-
+```
 SmartFarming/
 │
 ├── backend/        # Django Backend (Core logic & APIs)
 │
 └── mobile_app/     # Flutter Mobile Application (UI Layer)
-
+```
 ---
 
 # 📱 Flutter Mobile Application
@@ -44,7 +44,7 @@ SmartFarming/
 ---
 
 ## 📂 Flutter Folder Structure
-
+```
 lib/
 ├── screens/      # Full application screens
 ├── widgets/      # Reusable UI components
@@ -52,7 +52,7 @@ lib/
 ├── models/       # Data models
 ├── utils/        # Constants & helpers
 └── routes/       # Centralized navigation
-
+```
 ### Architecture Rules
 
 - Screens → Full pages
@@ -67,14 +67,17 @@ lib/
 ## 🚀 Running the Flutter App
 
 1. Navigate to the mobile app directory:
+```
    cd mobile_app
-
-2. Install dependencies:
+```
+3. Install dependencies:
+```
    flutter pub get
-
-3. Run the application:
+```
+5. Run the application:
+```
    flutter run
-
+```
 ---
 
 # 🖥️ Django Backend
@@ -97,7 +100,7 @@ Flutter does NOT contain any decision-making logic.
 ---
 
 ## 📂 Django Backend Structure (Planned Modular Apps)
-
+```
 backend/
 ├── accounts/      # Authentication APIs
 ├── crops/         # Image upload + ML inference
@@ -105,23 +108,23 @@ backend/
 ├── documents/     # OCR processing
 ├── marketplace/   # Products & orders
 └── core/          # Shared utilities
-
+```
 ---
 
 # 🔄 System Flow
 
 ## 🖼 Image Upload Flow
-
+```
 Flutter → Django API → ML Model → JSON Response → Flutter displays result
-
+```
 ## 🎙 Voice Query Flow
-
+```
 Flutter → Audio Upload → Django Speech-to-Text → NLP → Response → Flutter display
-
+```
 ## 📄 Document Scan Flow
-
+```
 Flutter → Upload Image/PDF → Django OCR → Extract Text → Analysis → Display
-
+```
 ---
 
 # 🔐 Authentication Flow
