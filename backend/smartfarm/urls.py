@@ -4,13 +4,15 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path("admin/", admin.site.urls),
+    path('admin/', admin.site.urls),
 
-    # ✅ All API routes under /api/
-    path("api/", include("uploads.urls")),
-    path("api/auth/", include("users.urls")),
+    # Users Authentication
+    path('api/auth/', include('users.urls')),
+
+    # Upload / Disease / Marketplace APIs
+    path('api/', include('uploads.urls')),
 ]
 
-# ✅ Serve uploaded media files in development
+# Media files
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
