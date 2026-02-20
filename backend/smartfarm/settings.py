@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     # Third-party apps
     'rest_framework',
     'corsheaders',
+    'drf_yasg',
 
     # Local apps
     'users',
@@ -170,3 +171,14 @@ SIMPLE_JWT = {
 # CORS SETTINGS (For Flutter / Frontend)
 # -------------------------------------------------
 CORS_ALLOW_ALL_ORIGINS = True
+
+SWAGGER_SETTINGS = {
+    "USE_SESSION_AUTH": False,  # disable basic auth
+    "SECURITY_DEFINITIONS": {
+        "Bearer": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header",
+        }
+    },
+}

@@ -1,8 +1,7 @@
 from rest_framework import viewsets, status
 from rest_framework.decorators import action
 from rest_framework.response import Response
-from rest_framework.permissions import IsAuthenticated
-
+from rest_framework.parsers import MultiPartParser, FormParser
 from .models import Upload, InferenceResult
 from .serializers import UploadSerializer, InferenceResultSerializer
 
@@ -37,7 +36,7 @@ class UploadViewSet(viewsets.ModelViewSet):
 
     queryset = Upload.objects.all().order_by("-created_at")
     serializer_class = UploadSerializer
-    permission_classes = [IsAuthenticated]
+    parser_classes = (MultiPartParser, FormParser)
 
     def perform_create(self, serializer):
         # attach logged-in user as owner
