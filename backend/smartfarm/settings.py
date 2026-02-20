@@ -4,13 +4,8 @@ Django settings for smartfarm project.
 
 from pathlib import Path
 from datetime import timedelta
-import os
 
-# -------------------------------------------------
-# BASE DIRECTORY
-# -------------------------------------------------
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # -------------------------------------------------
 # SECURITY SETTINGS
@@ -20,7 +15,6 @@ SECRET_KEY = 'django-insecure--v0w=c9al@9yhl0ejm^xlf=6q-kv%3(55!pve2h!%e-qa*12%2
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
 
 # -------------------------------------------------
 # APPLICATIONS
@@ -38,6 +32,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'drf_yasg',
+    'django_filters',
 
     # Local apps
     'users',
@@ -46,12 +41,11 @@ INSTALLED_APPS = [
     'ml_inference',
 ]
 
-
 # -------------------------------------------------
 # MIDDLEWARE
 # -------------------------------------------------
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',  # Must be at top
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -61,13 +55,8 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-
 ROOT_URLCONF = 'smartfarm.urls'
 
-
-# -------------------------------------------------
-# TEMPLATES
-# -------------------------------------------------
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -83,9 +72,7 @@ TEMPLATES = [
     },
 ]
 
-
 WSGI_APPLICATION = 'smartfarm.wsgi.application'
-
 
 # -------------------------------------------------
 # DATABASE
@@ -97,55 +84,37 @@ DATABASES = {
     }
 }
 
-
 # -------------------------------------------------
 # CUSTOM USER MODEL
 # -------------------------------------------------
 AUTH_USER_MODEL = "users.User"
 
-
 # -------------------------------------------------
 # PASSWORD VALIDATION
 # -------------------------------------------------
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
+    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
-
 
 # -------------------------------------------------
 # INTERNATIONALIZATION
 # -------------------------------------------------
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
 USE_TZ = True
 
-
 # -------------------------------------------------
-# STATIC & MEDIA FILES
+# STATIC & MEDIA
 # -------------------------------------------------
 STATIC_URL = 'static/'
-
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
-
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
 
 # -------------------------------------------------
 # DJANGO REST FRAMEWORK
@@ -154,8 +123,17 @@ REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     ),
+    "DEFAULT_PERMISSION_CLASSES": (
+        "rest_framework.permissions.IsAuthenticated",
+    ),
+    "DEFAULT_PAGINATION_CLASS":
+        "rest_framework.pagination.PageNumberPagination",
+    "PAGE_SIZE": 10,
+    "DEFAULT_FILTER_BACKENDS": (
+        "django_filters.rest_framework.DjangoFilterBackend",
+        "rest_framework.filters.OrderingFilter",
+    ),
 }
-
 
 # -------------------------------------------------
 # JWT SETTINGS
@@ -166,19 +144,78 @@ SIMPLE_JWT = {
     "AUTH_HEADER_TYPES": ("Bearer",),
 }
 
-
 # -------------------------------------------------
-# CORS SETTINGS (For Flutter / Frontend)
+# CORS
 # -------------------------------------------------
 CORS_ALLOW_ALL_ORIGINS = True
 
+# -------------------------------------------------
+# SWAGGER
+# -------------------------------------------------
 SWAGGER_SETTINGS = {
-    "USE_SESSION_AUTH": False,  # disable basic auth
+    "USE_SESSION_AUTH": False,
     "SECURITY_DEFINITIONS": {
         "Bearer": {
             "type": "apiKey",
             "name": "Authorization",
             "in": "header",
         }
+    },
+}
+
+# -------------------------------------------------
+# CELERY CONFIGURATION
+# -------------------------------------------------
+CELERY_BROKER_URL = 'redis://localhost:6379/0'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+
+# -------------------------------------------------
+# REST FRAMEWORK THROTTLING
+# -------------------------------------------------
+REST_FRAMEWORK.update({
+    "DEFAULT_THROTTLE_CLASSES": [
+        "rest_framework.throttling.UserRateThrottle",
+    ],
+    "DEFAULT_THROTTLE_RATES": {
+        "user": "1000/day",  # adjust as needed
+    },
+})
+
+# -------------------------------------------------
+# LOGGING
+# -------------------------------------------------
+import os
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": {
+        "verbose": {
+            "format": "[{levelname}] {asctime} {name} {message}",
+            "style": "{",
+        },
+    },
+    "handlers": {
+        "file": {
+            "level": "INFO",
+            "class": "logging.FileHandler",
+            "filename": os.path.join(BASE_DIR, "smartfarm.log"),
+            "formatter": "verbose",
+        },
+    },
+    "loggers": {
+        "django": {
+            "handlers": ["file"],
+            "level": "INFO",
+            "propagate": True,
+        },
+        "uploads": {
+            "handlers": ["file"],
+            "level": "INFO",
+            "propagate": True,
+        },
     },
 }

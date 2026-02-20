@@ -2,79 +2,85 @@ from rest_framework import viewsets, status
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.parsers import MultiPartParser, FormParser
-from .models import Upload, InferenceResult
+from rest_framework.permissions import IsAuthenticated
+
+from .models import Upload
 from .serializers import UploadSerializer, InferenceResultSerializer
-
-
-# 🔹 Mock inference function (replace with real AI model later)
-def mock_infer(image_path: str) -> dict:
-    """
-    Dummy AI logic – just returns a fixed disease.
-    Later, you will:
-    - load your ML model
-    - preprocess the image
-    - run prediction
-    - return actual disease + confidence + suggestions
-    """
-    return {
-        "disease": "Leaf Blight",
-        "confidence": 0.92,
-        "suggested_actions": [
-            "Spray recommended fungicide",
-            "Avoid overhead watering",
-            "Remove heavily affected leaves",
-        ],
-    }
+from .permissions import IsOwnerOrReadOnly
+from uploads.tasks import async_run_inference
 
 
 class UploadViewSet(viewsets.ModelViewSet):
     """
-    /api/uploads/                   (GET, POST)
-    /api/uploads/{id}/              (GET, PUT, DELETE)
-    /api/uploads/{id}/run_inference/   (POST)
+    /api/uploads/
+    /api/uploads/{id}/
+    /api/uploads/{id}/run_inference/
     """
 
-    queryset = Upload.objects.all().order_by("-created_at")
     serializer_class = UploadSerializer
     parser_classes = (MultiPartParser, FormParser)
+    permission_classes = [IsAuthenticated, IsOwnerOrReadOnly]
+
+    def get_queryset(self):
+        """
+        Owners see their uploads; marketplace reads handled elsewhere.
+        """
+        return Upload.objects.filter(owner=self.request.user).order_by("-created_at")
 
     def perform_create(self, serializer):
-        # attach logged-in user as owner
         serializer.save(owner=self.request.user)
 
     @action(detail=True, methods=["post"])
     def run_inference(self, request, pk=None):
-        """
-        Custom action:
-        POST /api/uploads/{id}/run_inference/
-
-        1. Takes the uploaded file
-        2. Calls mock_infer()
-        3. Saves InferenceResult
-        4. Returns JSON with disease, confidence, suggestions
-        """
         upload = self.get_object()
 
-        if upload.upload_type != "image":
+        # Prevent running inference if already processing or done
+        if upload.status == "processing":
             return Response(
-                {"detail": "Inference is only supported for image uploads right now."},
-                status=status.HTTP_400_BAD_REQUEST,
+                {"detail": "Inference already in progress.", "status": upload.status},
+                status=status.HTTP_202_ACCEPTED,
             )
+        if upload.status == "done":
+            # Return existing inference result
+            try:
+                result = upload.inferenceresult
+                return Response(
+                    InferenceResultSerializer(result).data,
+                    status=status.HTTP_200_OK,
+                )
+            except Exception:
+                return Response(
+                    {"detail": "Inference already completed but result missing.", "status": upload.status},
+                    status=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                )
 
-        # Call dummy AI function
-        result = mock_infer(upload.file.path)
-
-        inf, created = InferenceResult.objects.get_or_create(
-            upload=upload,
-            defaults={
-                "disease": result["disease"],
-                "confidence": result["confidence"],
-                "suggested_actions": result["suggested_actions"],
-            },
-        )
-
-        # mark upload as processed
-        upload.status = "done"
+        # Queue async task
+        async_run_inference.delay(upload.id)
+        upload.status = "processing"
         upload.save()
 
-        return Response(InferenceResultSerializer(inf).data, status=status.HTTP_200_OK)
+        return Response(
+            {"detail": "Inference started in background.", "status": upload.status},
+            status=status.HTTP_202_ACCEPTED,
+        )
+
+    @action(detail=True, methods=["get"])
+    def status(self, request, pk=None):
+        """
+        Get the current status of the upload and inference.
+        """
+        upload = self.get_object()
+        response = {
+            "upload_id": upload.id,
+            "status": upload.status,
+        }
+
+        # Include result if inference is done
+        if upload.status == "done":
+            try:
+                result = upload.inferenceresult
+                response["result"] = InferenceResultSerializer(result).data
+            except Exception:
+                response["result"] = None
+
+        return Response(response, status=status.HTTP_200_OK)
