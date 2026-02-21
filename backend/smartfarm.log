@@ -220,3 +220,16 @@ django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '10.27.151.133:
 [WARNING] 2026-02-21 13:42:39,633 django.server "POST /api/auth/login/ HTTP/1.1" 401 63
 [WARNING] 2026-02-21 13:42:59,345 django.request Bad Request: /api/auth/signup/
 [WARNING] 2026-02-21 13:42:59,346 django.server "POST /api/auth/signup/ HTTP/1.1" 400 58
+[INFO] 2026-02-21 13:48:41,327 django.server "POST /api/auth/login/ HTTP/1.1" 200 489
+[WARNING] 2026-02-21 14:04:34,333 django.request Unauthorized: /api/auth/login/
+[WARNING] 2026-02-21 14:04:34,337 django.server "POST /api/auth/login/ HTTP/1.1" 401 63
+[WARNING] 2026-02-21 14:09:08,339 django.request Unauthorized: /api/auth/login/
+[WARNING] 2026-02-21 14:09:08,545 django.server "POST /api/auth/login/ HTTP/1.1" 401 63
+[WARNING] 2026-02-21 14:09:48,441 django.request Not Found: /api/auth/uploads/
+[WARNING] 2026-02-21 14:09:48,444 django.server "POST /api/auth/uploads/ HTTP/1.1" 404 7595
+[WARNING] 2026-02-21 14:12:53,300 django.request Bad Request: /api/auth/signup/
+[WARNING] 2026-02-21 14:12:53,303 django.server "POST /api/auth/signup/ HTTP/1.1" 400 58
+[INFO] 2026-02-21 14:15:19,425 django.server "POST /api/auth/login/ HTTP/1.1" 200 489
+[INFO] 2026-02-21 14:18:10,624 django.server "POST /api/auth/login/ HTTP/1.1" 200 489
+[INFO] 2026-02-21 14:21:33,064 django.server "POST /api/auth/login/ HTTP/1.1" 200 489
+[INFO] 2026-02-21 14:31:18,798 django.server "POST /api/auth/login/ HTTP/1.1" 200 489
