@@ -64,7 +64,7 @@ class ResultScreen extends StatelessWidget {
             ),
             const SizedBox(height: 12),
 
-            ...actions.map((action) => BulletPoint(text: action)).toList(),
+            ...actions.map((action) => BulletPoint(text: action)),
           ],
         ),
       ),

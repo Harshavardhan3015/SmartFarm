@@ -8,8 +8,10 @@ import '../screens/voice_input_screen.dart';
 import '../screens/marketplace_screen.dart';
 import '../screens/scan_document_screen.dart';
 import '../screens/login_screen.dart';
+import '../screens/role_selection_screen.dart';
 
 class AppRoutes {
+  static const String roleSelection = '/role';
   static const String login = '/login';
   static const String home = '/';
   static const String upload = '/upload';
@@ -20,6 +22,7 @@ class AppRoutes {
   static const String marketplace = '/marketplace';
 
   static Map<String, WidgetBuilder> routes = {
+    roleSelection: (context) => const RoleSelectionScreen(),
     login: (context) => const LoginScreen(isAdmin: false),
     home: (context) => const HomeScreen(),
     upload: (context) => const UploadScreen(),
