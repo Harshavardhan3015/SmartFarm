@@ -1,45 +1,67 @@
 from celery import shared_task
-from uploads.models import Upload
-from ml_inference.services import run_inference_on_image
+from django.db import transaction
+from django.utils import timezone
 import logging
+import random
+
+from .models import Upload, InferenceResult
 
 logger = logging.getLogger(__name__)
 
-@shared_task(bind=True, max_retries=3, default_retry_delay=60)
-def async_run_inference(self, upload_id):
-    """
-    Asynchronous ML inference with automatic retries.
-    Updates Upload.status and logs progress.
-    """
+
+@shared_task(
+    bind=True,
+    autoretry_for=(Exception,),
+    retry_backoff=True,        # exponential backoff
+    retry_backoff_max=600,     # max 10 min delay
+    retry_kwargs={"max_retries": 3},
+)
+def run_inference(self, upload_id):
+
     try:
         upload = Upload.objects.get(id=upload_id)
-        
-        # Prevent double-processing
-        if upload.status in ["done", "processing"]:
-            logger.info(f"Upload ID {upload_id} already {upload.status}. Skipping inference.")
-            return
 
         # Mark as processing
         upload.status = "processing"
-        upload.save()
-        logger.info(f"Started inference for Upload ID {upload_id}")
+        upload.save(update_fields=["status"])
 
-        # Run ML service
-        inf = run_inference_on_image(upload)
+        # --- SIMULATED ML LOGIC ---
+        # Replace this with your real ML inference call
 
-        logger.info(f"Inference completed for Upload ID {upload_id}: Disease={inf.disease}")
+        disease_list = ["Leaf Blight", "Rust", "Healthy", "Powdery Mildew"]
+        disease = random.choice(disease_list)
+        confidence = round(random.uniform(0.75, 0.99), 2)
 
-    except Upload.DoesNotExist:
-        logger.error(f"Upload not found: {upload_id}")
+        # Simulate random failure (for testing retry)
+        # Remove this in production
+        if random.random() < 0.2:
+            raise Exception("Simulated ML crash")
+
+        with transaction.atomic():
+            InferenceResult.objects.update_or_create(
+                upload=upload,
+                defaults={
+                    "disease": disease,
+                    "confidence": confidence,
+                    "suggested_actions": [
+                        "Apply fungicide",
+                        "Improve irrigation control",
+                        "Monitor for 7 days",
+                    ],
+                },
+            )
+
+            upload.status = "done"
+            upload.save(update_fields=["status"])
+
+        logger.info(f"Inference successful for upload {upload.id}")
 
     except Exception as e:
-        # Mark as failed before retrying
-        try:
-            upload = Upload.objects.get(id=upload_id)
-            upload.status = "failed"
-            upload.save()
-        except Exception:
-            pass  # Ignore if upload not found while failing
+        logger.error(f"Inference failed for upload {upload_id}: {str(e)}")
 
-        logger.exception(f"Inference failed for Upload ID: {upload_id}. Retrying...")
+        upload = Upload.objects.filter(id=upload_id).first()
+        if upload:
+            upload.status = "failed"
+            upload.save(update_fields=["status"])
+
         raise self.retry(exc=e)
