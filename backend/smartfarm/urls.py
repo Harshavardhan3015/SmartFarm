@@ -28,6 +28,9 @@ urlpatterns = [
     # Upload APIs
     path('api/', include('uploads.urls')),
 
+    # farm monitoring APIs
+    path('api/farm/', include('farm_monitoring.urls')),
+
     # Marketplace APIs
     path('api/marketplace/', include('marketplace.urls')),
 

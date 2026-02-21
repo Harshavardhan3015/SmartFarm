@@ -94,3 +94,24 @@
 [INFO] 2026-02-21 12:40:37,672 django.server "GET /admin/jsi18n/ HTTP/1.1" 200 3342
 [INFO] 2026-02-21 12:42:40,266 django.server "GET /admin/ HTTP/1.1" 200 7187
 [INFO] 2026-02-21 12:43:07,122 django.server "GET /admin/ HTTP/1.1" 200 7187
+[INFO] 2026-02-21 13:00:04,186 django.utils.autoreload Watching for file changes with StatReloader
+[INFO] 2026-02-21 13:03:50,647 django.utils.autoreload Watching for file changes with StatReloader
+[INFO] 2026-02-21 13:04:04,879 django.server "GET /admin/ HTTP/1.1" 302 0
+[INFO] 2026-02-21 13:04:04,970 django.server "GET /admin/login/?next=/admin/ HTTP/1.1" 200 4080
+[WARNING] 2026-02-21 13:04:05,002 django.request Not Found: /.well-known/appspecific/com.chrome.devtools.json
+[WARNING] 2026-02-21 13:04:05,003 django.server "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 3300
+[INFO] 2026-02-21 13:04:05,332 django.server "GET /static/admin/css/login.css HTTP/1.1" 200 951
+[INFO] 2026-02-21 13:04:05,363 django.server "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 200 2810
+[INFO] 2026-02-21 13:04:05,364 django.server "GET /static/admin/css/responsive.css HTTP/1.1" 200 16273
+[INFO] 2026-02-21 13:04:05,378 django.server "GET /static/admin/css/dark_mode.css HTTP/1.1" 200 3538
+[INFO] 2026-02-21 13:04:05,382 django.server "GET /static/admin/css/base.css HTTP/1.1" 200 23100
+[INFO] 2026-02-21 13:04:05,385 django.server "GET /static/admin/js/theme.js HTTP/1.1" 200 1653
+[INFO] 2026-02-21 13:04:05,386 django.server "GET /static/admin/js/nav_sidebar.js HTTP/1.1" 200 3063
+[WARNING] 2026-02-21 13:04:05,440 django.request Not Found: /favicon.ico
+[WARNING] 2026-02-21 13:04:05,441 django.server "GET /favicon.ico HTTP/1.1" 404 3189
+[INFO] 2026-02-21 13:04:38,902 django.server "POST /admin/login/?next=/admin/ HTTP/1.1" 200 4248
+[INFO] 2026-02-21 13:04:49,748 django.server "POST /admin/login/?next=/admin/ HTTP/1.1" 200 4248
+[INFO] 2026-02-21 13:05:30,900 django.server "POST /admin/login/?next=/admin/ HTTP/1.1" 200 4248
+[INFO] 2026-02-21 13:06:03,807 django.server "POST /admin/login/?next=/admin/ HTTP/1.1" 200 4256
+[INFO] 2026-02-21 13:06:24,025 django.server "POST /admin/login/?next=/admin/ HTTP/1.1" 200 4256
+[INFO] 2026-02-21 13:24:55,858 django.server "POST /admin/login/?next=/admin/ HTTP/1.1" 200 4256

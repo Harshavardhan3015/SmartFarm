@@ -21,6 +21,7 @@ ALLOWED_HOSTS = []
 # -------------------------------------------------
 INSTALLED_APPS = [
     # Default Django apps
+    'farm_monitoring',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
