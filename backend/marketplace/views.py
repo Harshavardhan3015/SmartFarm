@@ -12,34 +12,35 @@ class ProductViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         user = self.request.user
 
-        # 🛡 Admin → can see everything
+        # 🛡 Admin sees all non-deleted products
         if user.is_authenticated and user.role == "admin":
-            return Product.objects.all().order_by("-created_at")
-
-        # 👤 Authenticated Farmer
-        if user.is_authenticated:
             return Product.objects.filter(
-                models.Q(status="active") | models.Q(owner=user)
+                is_deleted=False
             ).order_by("-created_at")
 
-        # 🌍 Anonymous → only active products
-        return Product.objects.filter(status="active").order_by("-created_at")
+        # 👤 Authenticated farmer
+        if user.is_authenticated:
+            return Product.objects.filter(
+                models.Q(status="active") | models.Q(owner=user),
+                is_deleted=False,
+            ).order_by("-created_at")
+
+        # 🌍 Anonymous
+        return Product.objects.filter(
+            status="active",
+            is_deleted=False,
+        ).order_by("-created_at")
 
     def perform_create(self, serializer):
-        if not self.request.user.is_authenticated:
-            raise PermissionDenied("Authentication required to create products.")
-
         serializer.save(owner=self.request.user)
 
     def perform_update(self, serializer):
         product = self.get_object()
 
-        # 🛡 Admin can update anything
         if self.request.user.role == "admin":
             serializer.save()
             return
 
-        # 👤 Owner can update own product
         if product.owner == self.request.user:
             serializer.save()
             return
@@ -47,14 +48,12 @@ class ProductViewSet(viewsets.ModelViewSet):
         raise PermissionDenied("You do not have permission to update this product.")
 
     def perform_destroy(self, instance):
-        # 🛡 Admin can delete anything
         if self.request.user.role == "admin":
-            instance.delete()
+            instance.soft_delete()
             return
 
-        # 👤 Owner can delete own product
         if instance.owner == self.request.user:
-            instance.delete()
+            instance.soft_delete()
             return
 
         raise PermissionDenied("You do not have permission to delete this product.")

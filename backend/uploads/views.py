@@ -20,12 +20,27 @@ class UploadViewSet(viewsets.ModelViewSet):
         user = self.request.user
 
         if user.role == "admin":
-            return Upload.objects.all().order_by("-created_at")
+            return Upload.objects.filter(
+                is_deleted=False
+            ).order_by("-created_at")
 
-        return Upload.objects.filter(owner=user).order_by("-created_at")
+        return Upload.objects.filter(
+            owner=user,
+            is_deleted=False
+        ).order_by("-created_at")
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
+
+    def perform_destroy(self, instance):
+        if self.request.user.role == "admin" or instance.owner == self.request.user:
+            instance.soft_delete()
+            return
+
+        return Response(
+            {"detail": "You do not have permission to delete this upload."},
+            status=status.HTTP_403_FORBIDDEN,
+        )
 
     # -----------------------------
     # RUN INFERENCE
@@ -34,9 +49,9 @@ class UploadViewSet(viewsets.ModelViewSet):
     def run_inference(self, request, pk=None):
         upload = self.get_object()
 
-        if upload.status in ["processing"]:
+        if upload.status == "processing":
             return Response(
-                {"detail": "Inference already in progress.", "status": upload.status},
+                {"detail": "Inference already in progress."},
                 status=status.HTTP_202_ACCEPTED,
             )
 
@@ -49,31 +64,19 @@ class UploadViewSet(viewsets.ModelViewSet):
                 )
             except Exception:
                 return Response(
-                    {
-                        "detail": "Inference completed but result missing.",
-                        "status": upload.status,
-                    },
+                    {"detail": "Result missing."},
                     status=status.HTTP_500_INTERNAL_SERVER_ERROR,
                 )
 
-        if upload.status == "failed":
-            # allow retry
-            run_inference.delay(upload.id)
-            return Response(
-                {"detail": "Retrying inference.", "status": "processing"},
-                status=status.HTTP_202_ACCEPTED,
-            )
-
-        # pending case
         run_inference.delay(upload.id)
 
         return Response(
-            {"detail": "Inference started in background.", "status": "processing"},
+            {"detail": "Inference started."},
             status=status.HTTP_202_ACCEPTED,
         )
 
     # -----------------------------
-    # CHECK STATUS
+    # STATUS CHECK
     # -----------------------------
     @action(detail=True, methods=["get"])
     def status(self, request, pk=None):
@@ -91,7 +94,7 @@ class UploadViewSet(viewsets.ModelViewSet):
             except Exception:
                 response["result"] = None
 
-        return Response(response, status=status.HTTP_200_OK)
+        return Response(response)
 
     # -----------------------------
     # ADMIN APPROVAL
@@ -106,7 +109,7 @@ class UploadViewSet(viewsets.ModelViewSet):
 
         if upload.status != "done":
             return Response(
-                {"detail": "Cannot approve before inference is completed."},
+                {"detail": "Cannot approve before inference completes."},
                 status=status.HTTP_400_BAD_REQUEST,
             )
 
@@ -115,6 +118,6 @@ class UploadViewSet(viewsets.ModelViewSet):
         upload.save(update_fields=["is_public", "status"])
 
         return Response(
-            {"detail": "Upload approved and published to marketplace."},
+            {"detail": "Upload approved."},
             status=status.HTTP_200_OK,
         )

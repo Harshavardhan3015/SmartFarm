@@ -1,9 +1,6 @@
 from django.db import models
 from django.conf import settings
-
-
-from django.db import models
-from django.conf import settings
+from django.utils import timezone
 
 
 class Upload(models.Model):
@@ -28,6 +25,7 @@ class Upload(models.Model):
     )
 
     file = models.FileField(upload_to="uploads/%Y/%m/%d/")
+
     upload_type = models.CharField(
         max_length=20,
         choices=UPLOAD_TYPE_CHOICES,
@@ -42,6 +40,10 @@ class Upload(models.Model):
 
     is_public = models.BooleanField(default=False)
 
+    # 🔥 Soft Delete Fields
+    is_deleted = models.BooleanField(default=False)
+    deleted_at = models.DateTimeField(null=True, blank=True)
+
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -52,10 +54,15 @@ class Upload(models.Model):
             models.Index(fields=["created_at"]),
         ]
 
+    def soft_delete(self):
+        self.is_deleted = True
+        self.deleted_at = timezone.now()
+        self.save(update_fields=["is_deleted", "deleted_at"])
+
     def __str__(self):
         return f"Upload {self.id} - {self.owner.username}"
 
-        
+
 class InferenceResult(models.Model):
     upload = models.OneToOneField(
         Upload,
