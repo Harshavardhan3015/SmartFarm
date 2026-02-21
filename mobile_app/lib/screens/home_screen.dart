@@ -53,6 +53,13 @@ class HomeScreen extends StatelessWidget {
                     Navigator.pushNamed(context, AppRoutes.scan);
                   },
                 ),
+                ActionButton(
+                  icon: Icons.cloud,
+                  label: 'Weather',
+                  onTap: () {
+                    Navigator.pushNamed(context, AppRoutes.weather);
+                  },
+                ),
               ],
             ),
 

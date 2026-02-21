@@ -1,0 +1,235 @@
+[INFO] 2026-02-21 12:15:27,532 django.utils.autoreload Watching for file changes with StatReloader
+[INFO] 2026-02-21 12:18:31,361 django.utils.autoreload Watching for file changes with StatReloader
+[WARNING] 2026-02-21 12:18:34,927 django.request Not Found: /
+[WARNING] 2026-02-21 12:18:34,927 django.server "GET / HTTP/1.1" 404 2979
+[WARNING] 2026-02-21 12:18:35,057 django.request Not Found: /favicon.ico
+[WARNING] 2026-02-21 12:18:35,058 django.server "GET /favicon.ico HTTP/1.1" 404 3030
+[INFO] 2026-02-21 12:18:45,655 django.server "GET /swagger/ HTTP/1.1" 200 1637
+[INFO] 2026-02-21 12:18:45,687 django.server "GET /static/drf-yasg/style.css HTTP/1.1" 304 0
+[INFO] 2026-02-21 12:18:45,690 django.server "GET /static/drf-yasg/swagger-ui-dist/swagger-ui.css HTTP/1.1" 304 0
+[INFO] 2026-02-21 12:18:45,691 django.server "GET /static/drf-yasg/swagger-ui-dist/swagger-ui-bundle.js HTTP/1.1" 304 0
+[INFO] 2026-02-21 12:18:45,694 django.server "GET /static/drf-yasg/swagger-ui-init.js HTTP/1.1" 304 0
+[INFO] 2026-02-21 12:18:45,695 django.server "GET /static/drf-yasg/swagger-ui-dist/swagger-ui-standalone-preset.js HTTP/1.1" 304 0
+[INFO] 2026-02-21 12:18:45,695 django.server "GET /static/drf-yasg/insQ.min.js HTTP/1.1" 304 0
+[INFO] 2026-02-21 12:18:45,696 django.server "GET /static/drf-yasg/immutable.min.js HTTP/1.1" 304 0
+[INFO] 2026-02-21 12:18:45,861 django.server "GET /swagger/?format=openapi HTTP/1.1" 200 7339
+[INFO] 2026-02-21 12:19:17,845 django.server "POST /api/auth/login/ HTTP/1.1" 200 489
+[INFO] 2026-02-21 12:20:09,978 django.server "POST /api/uploads/ HTTP/1.1" 201 168
+[INFO] 2026-02-21 12:20:31,338 django.server "POST /api/uploads/ HTTP/1.1" 201 179
+[INFO] 2026-02-21 12:22:00,339 django.server "GET /swagger/ HTTP/1.1" 200 1637
+[INFO] 2026-02-21 12:22:00,483 django.server "GET /static/drf-yasg/swagger-ui-dist/favicon-32x32.png HTTP/1.1" 304 0
+[INFO] 2026-02-21 12:22:00,520 django.server "GET /swagger/?format=openapi HTTP/1.1" 200 7339
+[INFO] 2026-02-21 12:34:09,769 django.utils.autoreload Watching for file changes with StatReloader
+[WARNING] 2026-02-21 12:34:28,046 django.request Not Found: /
+[WARNING] 2026-02-21 12:34:28,046 django.server "GET / HTTP/1.1" 404 3138
+[INFO] 2026-02-21 12:34:49,795 django.server "GET /api/marketplace/uploads HTTP/1.1" 301 0
+[INFO] 2026-02-21 12:34:49,865 django.server "GET /api/marketplace/uploads/ HTTP/1.1" 200 8141
+[INFO] 2026-02-21 12:34:49,893 django.server "GET /static/rest_framework/css/bootstrap.min.css HTTP/1.1" 304 0
+[INFO] 2026-02-21 12:34:49,894 django.server "GET /static/rest_framework/css/bootstrap-tweaks.css HTTP/1.1" 304 0
+[INFO] 2026-02-21 12:34:49,898 django.server "GET /static/rest_framework/css/prettify.css HTTP/1.1" 304 0
+[INFO] 2026-02-21 12:34:49,900 django.server "GET /static/rest_framework/css/default.css HTTP/1.1" 304 0
+[INFO] 2026-02-21 12:34:49,901 django.server "GET /static/rest_framework/js/ajax-form.js HTTP/1.1" 304 0
+[INFO] 2026-02-21 12:34:49,902 django.server "GET /static/rest_framework/js/csrf.js HTTP/1.1" 304 0
+[INFO] 2026-02-21 12:34:49,903 django.server "GET /static/rest_framework/js/jquery-3.7.1.min.js HTTP/1.1" 304 0
+[INFO] 2026-02-21 12:34:49,904 django.server "GET /static/rest_framework/js/prettify-min.js HTTP/1.1" 304 0
+[INFO] 2026-02-21 12:34:49,905 django.server "GET /static/rest_framework/js/bootstrap.min.js HTTP/1.1" 304 0
+[INFO] 2026-02-21 12:34:49,905 django.server "GET /static/rest_framework/js/load-ajax-form.js HTTP/1.1" 304 0
+[INFO] 2026-02-21 12:34:49,906 django.server "GET /static/rest_framework/js/default.js HTTP/1.1" 304 0
+[INFO] 2026-02-21 12:34:49,911 django.server "GET /static/rest_framework/img/grid.png HTTP/1.1" 304 0
+[INFO] 2026-02-21 12:34:50,004 django.server "GET /static/rest_framework/fonts/glyphicons-halflings-regular.woff2 HTTP/1.1" 200 18028
+[INFO] 2026-02-21 12:35:02,897 django.server "OPTIONS /api/marketplace/uploads/ HTTP/1.1" 200 5987
+[INFO] 2026-02-21 12:35:05,576 django.server "OPTIONS /api/marketplace/uploads/ HTTP/1.1" 200 5987
+[INFO] 2026-02-21 12:35:14,436 django.server "GET /api/marketplace/uploads/ HTTP/1.1" 200 8141
+[INFO] 2026-02-21 12:35:16,441 django.server "GET /api/marketplace/uploads/ HTTP/1.1" 200 8141
+[WARNING] 2026-02-21 12:35:25,475 django.request Unauthorized: /api/uploads/
+[WARNING] 2026-02-21 12:35:25,476 django.server "GET /api/uploads/ HTTP/1.1" 401 5170
+[INFO] 2026-02-21 12:35:42,279 django.server "GET /swagger/ HTTP/1.1" 200 1637
+[INFO] 2026-02-21 12:35:42,457 django.server "GET /swagger/?format=openapi HTTP/1.1" 200 8597
+[INFO] 2026-02-21 12:35:54,190 django.server "GET /api/marketplace/uploads/ HTTP/1.1" 200 52
+[WARNING] 2026-02-21 12:36:41,719 django.request Not Found: /api/admin
+[WARNING] 2026-02-21 12:36:41,719 django.server "GET /api/admin HTTP/1.1" 404 6926
+[INFO] 2026-02-21 12:36:45,108 django.server "GET /admin/ HTTP/1.1" 200 7187
+[INFO] 2026-02-21 12:36:45,127 django.server "GET /static/admin/css/dark_mode.css HTTP/1.1" 304 0
+[INFO] 2026-02-21 12:36:45,127 django.server "GET /static/admin/css/base.css HTTP/1.1" 304 0
+[INFO] 2026-02-21 12:36:45,127 django.server "GET /static/admin/js/theme.js HTTP/1.1" 304 0
+[INFO] 2026-02-21 12:36:45,138 django.server "GET /static/admin/css/dashboard.css HTTP/1.1" 304 0
+[INFO] 2026-02-21 12:36:45,138 django.server "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 304 0
+[INFO] 2026-02-21 12:36:45,139 django.server "GET /static/admin/css/responsive.css HTTP/1.1" 304 0
+[INFO] 2026-02-21 12:36:45,144 django.server "GET /static/admin/js/nav_sidebar.js HTTP/1.1" 304 0
+[INFO] 2026-02-21 12:36:45,155 django.server "GET /static/admin/img/icon-addlink.svg HTTP/1.1" 304 0
+[INFO] 2026-02-21 12:36:45,155 django.server "GET /static/admin/img/icon-changelink.svg HTTP/1.1" 304 0
+[INFO] 2026-02-21 12:36:48,494 django.server "GET /admin/uploads/upload/ HTTP/1.1" 200 13033
+[INFO] 2026-02-21 12:36:48,536 django.server "GET /static/admin/css/changelists.css HTTP/1.1" 200 7498
+[INFO] 2026-02-21 12:36:48,536 django.server "GET /static/admin/js/jquery.init.js HTTP/1.1" 200 347
+[INFO] 2026-02-21 12:36:48,536 django.server "GET /static/admin/js/core.js HTTP/1.1" 200 6208
+[INFO] 2026-02-21 12:36:48,538 django.server "GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 200 9777
+[INFO] 2026-02-21 12:36:48,545 django.server "GET /static/admin/js/actions.js HTTP/1.1" 200 8076
+[INFO] 2026-02-21 12:36:48,547 django.server "GET /static/admin/js/urlify.js HTTP/1.1" 200 7887
+[INFO] 2026-02-21 12:36:48,547 django.server "GET /static/admin/js/prepopulate.js HTTP/1.1" 200 1531
+[INFO] 2026-02-21 12:36:48,552 django.server "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+[INFO] 2026-02-21 12:36:48,552 django.server "GET /static/admin/img/search.svg HTTP/1.1" 200 607
+[INFO] 2026-02-21 12:36:48,557 django.server "GET /static/admin/js/vendor/jquery/jquery.js HTTP/1.1" 200 285314
+[INFO] 2026-02-21 12:36:48,558 django.server "GET /static/admin/js/vendor/xregexp/xregexp.js HTTP/1.1" 200 325171
+[INFO] 2026-02-21 12:36:48,566 django.server "GET /static/admin/js/filters.js HTTP/1.1" 200 978
+[INFO] 2026-02-21 12:36:48,598 django.server "GET /static/admin/img/tooltag-add.svg HTTP/1.1" 200 593
+[INFO] 2026-02-21 12:36:48,599 django.server "GET /static/admin/img/icon-viewlink.svg HTTP/1.1" 200 928
+[INFO] 2026-02-21 12:37:19,828 django.server "GET /admin/ HTTP/1.1" 200 7187
+[INFO] 2026-02-21 12:37:23,304 django.server "GET /admin/uploads/inferenceresult/ HTTP/1.1" 200 10563
+[INFO] 2026-02-21 12:37:23,343 django.server "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+[INFO] 2026-02-21 12:37:28,610 django.server "GET /admin/uploads/inferenceresult/1/change/ HTTP/1.1" 200 13114
+[INFO] 2026-02-21 12:37:28,645 django.server "GET /static/admin/js/prepopulate_init.js HTTP/1.1" 200 586
+[INFO] 2026-02-21 12:37:28,645 django.server "GET /static/admin/css/forms.css HTTP/1.1" 200 8817
+[INFO] 2026-02-21 12:37:28,647 django.server "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+[INFO] 2026-02-21 12:37:28,650 django.server "GET /static/admin/css/widgets.css HTTP/1.1" 200 11811
+[INFO] 2026-02-21 12:37:28,653 django.server "GET /static/admin/js/change_form.js HTTP/1.1" 200 606
+[INFO] 2026-02-21 12:38:23,489 django.server "GET /admin/uploads/upload/ HTTP/1.1" 200 13033
+[INFO] 2026-02-21 12:38:23,526 django.server "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+[INFO] 2026-02-21 12:39:01,831 django.server "GET /admin/uploads/inferenceresult/ HTTP/1.1" 200 10563
+[INFO] 2026-02-21 12:39:01,875 django.server "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+[INFO] 2026-02-21 12:39:08,447 django.server "GET /admin/uploads/inferenceresult/1/change/ HTTP/1.1" 200 13114
+[INFO] 2026-02-21 12:39:08,483 django.server "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+[INFO] 2026-02-21 12:40:27,223 django.server "GET /admin/uploads/upload/1/change/?_to_field=id HTTP/1.1" 200 12482
+[INFO] 2026-02-21 12:40:27,263 django.server "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+[INFO] 2026-02-21 12:40:37,637 django.server "GET /admin/uploads/upload/ HTTP/1.1" 200 13033
+[INFO] 2026-02-21 12:40:37,672 django.server "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+[INFO] 2026-02-21 12:42:40,266 django.server "GET /admin/ HTTP/1.1" 200 7187
+[INFO] 2026-02-21 12:43:07,122 django.server "GET /admin/ HTTP/1.1" 200 7187
+[INFO] 2026-02-21 13:34:04,793 django.utils.autoreload Watching for file changes with StatReloader
+[ERROR] 2026-02-21 13:36:02,513 django.security.DisallowedHost Invalid HTTP_HOST header: '10.27.151.133:8000'. You may need to add '10.27.151.133' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "C:\Users\Aishw\AppData\Local\Programs\Python\Python310\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\Aishw\AppData\Local\Programs\Python\Python310\lib\site-packages\django\utils\deprecation.py", line 119, in __call__
+    response = self.process_request(request)
+  File "C:\Users\Aishw\AppData\Local\Programs\Python\Python310\lib\site-packages\django\middleware\common.py", line 48, in process_request
+    host = request.get_host()
+  File "C:\Users\Aishw\AppData\Local\Programs\Python\Python310\lib\site-packages\django\http\request.py", line 202, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '10.27.151.133:8000'. You may need to add '10.27.151.133' to ALLOWED_HOSTS.
+[WARNING] 2026-02-21 13:36:02,522 django.server "POST /api/auth/login/ HTTP/1.1" 400 73684
+[ERROR] 2026-02-21 13:36:20,570 django.security.DisallowedHost Invalid HTTP_HOST header: '10.27.151.133:8000'. You may need to add '10.27.151.133' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "C:\Users\Aishw\AppData\Local\Programs\Python\Python310\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\Aishw\AppData\Local\Programs\Python\Python310\lib\site-packages\django\utils\deprecation.py", line 119, in __call__
+    response = self.process_request(request)
+  File "C:\Users\Aishw\AppData\Local\Programs\Python\Python310\lib\site-packages\django\middleware\common.py", line 48, in process_request
+    host = request.get_host()
+  File "C:\Users\Aishw\AppData\Local\Programs\Python\Python310\lib\site-packages\django\http\request.py", line 202, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '10.27.151.133:8000'. You may need to add '10.27.151.133' to ALLOWED_HOSTS.
+[WARNING] 2026-02-21 13:36:20,572 django.server "POST /api/auth/login/ HTTP/1.1" 400 73684
+[ERROR] 2026-02-21 13:36:37,931 django.security.DisallowedHost Invalid HTTP_HOST header: '10.27.151.133:8000'. You may need to add '10.27.151.133' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "C:\Users\Aishw\AppData\Local\Programs\Python\Python310\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\Aishw\AppData\Local\Programs\Python\Python310\lib\site-packages\django\utils\deprecation.py", line 119, in __call__
+    response = self.process_request(request)
+  File "C:\Users\Aishw\AppData\Local\Programs\Python\Python310\lib\site-packages\django\middleware\common.py", line 48, in process_request
+    host = request.get_host()
+  File "C:\Users\Aishw\AppData\Local\Programs\Python\Python310\lib\site-packages\django\http\request.py", line 202, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '10.27.151.133:8000'. You may need to add '10.27.151.133' to ALLOWED_HOSTS.
+[WARNING] 2026-02-21 13:36:37,935 django.server "POST /api/auth/login/ HTTP/1.1" 400 73684
+[ERROR] 2026-02-21 13:36:54,820 django.security.DisallowedHost Invalid HTTP_HOST header: '10.27.151.133:8000'. You may need to add '10.27.151.133' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "C:\Users\Aishw\AppData\Local\Programs\Python\Python310\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\Aishw\AppData\Local\Programs\Python\Python310\lib\site-packages\django\utils\deprecation.py", line 119, in __call__
+    response = self.process_request(request)
+  File "C:\Users\Aishw\AppData\Local\Programs\Python\Python310\lib\site-packages\django\middleware\common.py", line 48, in process_request
+    host = request.get_host()
+  File "C:\Users\Aishw\AppData\Local\Programs\Python\Python310\lib\site-packages\django\http\request.py", line 202, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '10.27.151.133:8000'. You may need to add '10.27.151.133' to ALLOWED_HOSTS.
+[WARNING] 2026-02-21 13:36:54,822 django.server "POST /api/auth/signup/ HTTP/1.1" 400 73667
+[ERROR] 2026-02-21 13:36:59,232 django.security.DisallowedHost Invalid HTTP_HOST header: '10.27.151.133:8000'. You may need to add '10.27.151.133' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "C:\Users\Aishw\AppData\Local\Programs\Python\Python310\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\Aishw\AppData\Local\Programs\Python\Python310\lib\site-packages\django\utils\deprecation.py", line 119, in __call__
+    response = self.process_request(request)
+  File "C:\Users\Aishw\AppData\Local\Programs\Python\Python310\lib\site-packages\django\middleware\common.py", line 48, in process_request
+    host = request.get_host()
+  File "C:\Users\Aishw\AppData\Local\Programs\Python\Python310\lib\site-packages\django\http\request.py", line 202, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '10.27.151.133:8000'. You may need to add '10.27.151.133' to ALLOWED_HOSTS.
+[WARNING] 2026-02-21 13:36:59,234 django.server "POST /api/auth/signup/ HTTP/1.1" 400 73667
+[ERROR] 2026-02-21 13:37:07,653 django.security.DisallowedHost Invalid HTTP_HOST header: '10.27.151.133:8000'. You may need to add '10.27.151.133' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "C:\Users\Aishw\AppData\Local\Programs\Python\Python310\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\Aishw\AppData\Local\Programs\Python\Python310\lib\site-packages\django\utils\deprecation.py", line 119, in __call__
+    response = self.process_request(request)
+  File "C:\Users\Aishw\AppData\Local\Programs\Python\Python310\lib\site-packages\django\middleware\common.py", line 48, in process_request
+    host = request.get_host()
+  File "C:\Users\Aishw\AppData\Local\Programs\Python\Python310\lib\site-packages\django\http\request.py", line 202, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '10.27.151.133:8000'. You may need to add '10.27.151.133' to ALLOWED_HOSTS.
+[WARNING] 2026-02-21 13:37:07,655 django.server "POST /api/auth/signup/ HTTP/1.1" 400 73667
+[ERROR] 2026-02-21 13:37:30,282 django.security.DisallowedHost Invalid HTTP_HOST header: '10.27.151.133:8000'. You may need to add '10.27.151.133' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "C:\Users\Aishw\AppData\Local\Programs\Python\Python310\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\Aishw\AppData\Local\Programs\Python\Python310\lib\site-packages\django\utils\deprecation.py", line 119, in __call__
+    response = self.process_request(request)
+  File "C:\Users\Aishw\AppData\Local\Programs\Python\Python310\lib\site-packages\django\middleware\common.py", line 48, in process_request
+    host = request.get_host()
+  File "C:\Users\Aishw\AppData\Local\Programs\Python\Python310\lib\site-packages\django\http\request.py", line 202, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '10.27.151.133:8000'. You may need to add '10.27.151.133' to ALLOWED_HOSTS.
+[WARNING] 2026-02-21 13:37:30,286 django.server "POST /api/auth/signup/ HTTP/1.1" 400 73667
+[ERROR] 2026-02-21 13:38:29,138 django.security.DisallowedHost Invalid HTTP_HOST header: '10.27.151.133:8000'. You may need to add '10.27.151.133' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "C:\Users\Aishw\AppData\Local\Programs\Python\Python310\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\Aishw\AppData\Local\Programs\Python\Python310\lib\site-packages\django\utils\deprecation.py", line 119, in __call__
+    response = self.process_request(request)
+  File "C:\Users\Aishw\AppData\Local\Programs\Python\Python310\lib\site-packages\django\middleware\common.py", line 48, in process_request
+    host = request.get_host()
+  File "C:\Users\Aishw\AppData\Local\Programs\Python\Python310\lib\site-packages\django\http\request.py", line 202, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '10.27.151.133:8000'. You may need to add '10.27.151.133' to ALLOWED_HOSTS.
+[WARNING] 2026-02-21 13:38:29,142 django.server "POST /api/auth/login/ HTTP/1.1" 400 73684
+[ERROR] 2026-02-21 13:38:45,420 django.security.DisallowedHost Invalid HTTP_HOST header: '10.27.151.133:8000'. You may need to add '10.27.151.133' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "C:\Users\Aishw\AppData\Local\Programs\Python\Python310\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\Aishw\AppData\Local\Programs\Python\Python310\lib\site-packages\django\utils\deprecation.py", line 119, in __call__
+    response = self.process_request(request)
+  File "C:\Users\Aishw\AppData\Local\Programs\Python\Python310\lib\site-packages\django\middleware\common.py", line 48, in process_request
+    host = request.get_host()
+  File "C:\Users\Aishw\AppData\Local\Programs\Python\Python310\lib\site-packages\django\http\request.py", line 202, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '10.27.151.133:8000'. You may need to add '10.27.151.133' to ALLOWED_HOSTS.
+[WARNING] 2026-02-21 13:38:45,422 django.server "POST /api/auth/login/ HTTP/1.1" 400 73684
+[INFO] 2026-02-21 13:39:00,381 django.utils.autoreload C:\Users\Aishw\OneDrive\Desktop\SmartFarm\backend\smartfarm\settings.py changed, reloading.
+[INFO] 2026-02-21 13:39:04,589 django.utils.autoreload Watching for file changes with StatReloader
+[INFO] 2026-02-21 13:39:09,946 django.utils.autoreload C:\Users\Aishw\OneDrive\Desktop\SmartFarm\backend\smartfarm\settings.py changed, reloading.
+[INFO] 2026-02-21 13:39:12,447 django.utils.autoreload Watching for file changes with StatReloader
+[INFO] 2026-02-21 13:39:17,012 django.utils.autoreload C:\Users\Aishw\OneDrive\Desktop\SmartFarm\backend\users\views.py changed, reloading.
+[INFO] 2026-02-21 13:39:19,524 django.utils.autoreload Watching for file changes with StatReloader
+[INFO] 2026-02-21 13:39:36,467 django.utils.autoreload Watching for file changes with StatReloader
+[WARNING] 2026-02-21 13:41:19,851 django.request Unauthorized: /api/auth/login/
+[WARNING] 2026-02-21 13:41:19,854 django.server "POST /api/auth/login/ HTTP/1.1" 401 63
+[INFO] 2026-02-21 13:41:43,644 django.server "POST /api/auth/signup/ HTTP/1.1" 201 39
+[INFO] 2026-02-21 13:42:00,318 django.server "POST /api/auth/login/ HTTP/1.1" 200 489
+[WARNING] 2026-02-21 13:42:12,242 django.request Unauthorized: /api/auth/login/
+[WARNING] 2026-02-21 13:42:12,243 django.server "POST /api/auth/login/ HTTP/1.1" 401 63
+[WARNING] 2026-02-21 13:42:39,632 django.request Unauthorized: /api/auth/login/
+[WARNING] 2026-02-21 13:42:39,633 django.server "POST /api/auth/login/ HTTP/1.1" 401 63
+[WARNING] 2026-02-21 13:42:59,345 django.request Bad Request: /api/auth/signup/
+[WARNING] 2026-02-21 13:42:59,346 django.server "POST /api/auth/signup/ HTTP/1.1" 400 58
+[INFO] 2026-02-21 13:48:41,327 django.server "POST /api/auth/login/ HTTP/1.1" 200 489
+[WARNING] 2026-02-21 14:04:34,333 django.request Unauthorized: /api/auth/login/
+[WARNING] 2026-02-21 14:04:34,337 django.server "POST /api/auth/login/ HTTP/1.1" 401 63
+[WARNING] 2026-02-21 14:09:08,339 django.request Unauthorized: /api/auth/login/
+[WARNING] 2026-02-21 14:09:08,545 django.server "POST /api/auth/login/ HTTP/1.1" 401 63
+[WARNING] 2026-02-21 14:09:48,441 django.request Not Found: /api/auth/uploads/
+[WARNING] 2026-02-21 14:09:48,444 django.server "POST /api/auth/uploads/ HTTP/1.1" 404 7595
+[WARNING] 2026-02-21 14:12:53,300 django.request Bad Request: /api/auth/signup/
+[WARNING] 2026-02-21 14:12:53,303 django.server "POST /api/auth/signup/ HTTP/1.1" 400 58
+[INFO] 2026-02-21 14:15:19,425 django.server "POST /api/auth/login/ HTTP/1.1" 200 489
+[INFO] 2026-02-21 14:18:10,624 django.server "POST /api/auth/login/ HTTP/1.1" 200 489
+[INFO] 2026-02-21 14:21:33,064 django.server "POST /api/auth/login/ HTTP/1.1" 200 489
+[INFO] 2026-02-21 14:31:18,798 django.server "POST /api/auth/login/ HTTP/1.1" 200 489

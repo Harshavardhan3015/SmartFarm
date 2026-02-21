@@ -9,6 +9,7 @@ import '../screens/marketplace_screen.dart';
 import '../screens/scan_document_screen.dart';
 import '../screens/login_screen.dart';
 import '../screens/role_selection_screen.dart';
+import '../screens/weather_screen.dart';
 
 class AppRoutes {
   static const String roleSelection = '/role';
@@ -20,6 +21,7 @@ class AppRoutes {
   static const String voice = '/voice';
   static const String scan = '/scan';
   static const String marketplace = '/marketplace';
+  static const String weather = '/weather';
 
   static Map<String, WidgetBuilder> routes = {
     roleSelection: (context) => const RoleSelectionScreen(),
@@ -31,5 +33,6 @@ class AppRoutes {
     voice: (context) => const VoiceInputScreen(),
     scan: (context) => const ScanDocumentScreen(),
     marketplace: (context) => const MarketplaceScreen(),
+    weather: (context) => const WeatherScreen(),
   };
 }
