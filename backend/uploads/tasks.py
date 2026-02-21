@@ -1,67 +1,106 @@
 from celery import shared_task
 from django.db import transaction
-from django.utils import timezone
+from django.db.utils import OperationalError
+from django.core.exceptions import ObjectDoesNotExist
 import logging
-import random
 
 from .models import Upload, InferenceResult
+from ml_models.infer import predict
 
 logger = logging.getLogger(__name__)
 
 
+def generate_actions(disease: str):
+    recommendations = {
+        "Leaf Blight": [
+            "Spray recommended fungicide",
+            "Remove infected leaves",
+            "Avoid overhead irrigation",
+        ],
+        "Rust": [
+            "Apply sulfur-based spray",
+            "Ensure proper spacing between plants",
+        ],
+        "Powdery Mildew": [
+            "Apply neem oil solution",
+            "Increase air circulation",
+        ],
+        "Healthy": [
+            "No treatment required",
+            "Continue regular monitoring",
+        ],
+    }
+
+    return recommendations.get(
+        disease,
+        [
+            "Consult agricultural expert",
+            "Monitor crop condition",
+        ],
+    )
+
+
 @shared_task(
     bind=True,
-    autoretry_for=(Exception,),
-    retry_backoff=True,        # exponential backoff
-    retry_backoff_max=600,     # max 10 min delay
+    autoretry_for=(OperationalError,),  # Retry only DB-level transient errors
+    retry_backoff=True,
+    retry_backoff_max=600,
     retry_kwargs={"max_retries": 3},
 )
-def run_inference(self, upload_id):
+def run_inference(self, upload_id: int):
+    """
+    Background ML inference task.
+
+    Safe against:
+    - Duplicate runs
+    - Missing upload
+    - DB race conditions
+    - Model failures
+    """
+
+    logger.info(f"[Inference Start] Upload ID: {upload_id}")
 
     try:
-        upload = Upload.objects.get(id=upload_id)
+        upload = Upload.objects.select_for_update().get(id=upload_id)
+    except ObjectDoesNotExist:
+        logger.warning(f"[Inference Abort] Upload {upload_id} does not exist.")
+        return
 
-        # Mark as processing
+    # Prevent duplicate processing
+    if upload.status in ["processing", "approved"]:
+        logger.info(f"[Inference Skip] Upload {upload_id} already in status {upload.status}")
+        return
+
+    try:
         upload.status = "processing"
         upload.save(update_fields=["status"])
 
-        # --- SIMULATED ML LOGIC ---
-        # Replace this with your real ML inference call
-
-        disease_list = ["Leaf Blight", "Rust", "Healthy", "Powdery Mildew"]
-        disease = random.choice(disease_list)
-        confidence = round(random.uniform(0.75, 0.99), 2)
-
-        # Simulate random failure (for testing retry)
-        # Remove this in production
-        if random.random() < 0.2:
-            raise Exception("Simulated ML crash")
+        # 🔥 ML Inference
+        result = predict(upload.file.path)
 
         with transaction.atomic():
             InferenceResult.objects.update_or_create(
                 upload=upload,
                 defaults={
-                    "disease": disease,
-                    "confidence": confidence,
-                    "suggested_actions": [
-                        "Apply fungicide",
-                        "Improve irrigation control",
-                        "Monitor for 7 days",
-                    ],
+                    "disease": result["disease"],
+                    "confidence": result["confidence"],
+                    "suggested_actions": generate_actions(result["disease"]),
                 },
             )
 
             upload.status = "done"
             upload.save(update_fields=["status"])
 
-        logger.info(f"Inference successful for upload {upload.id}")
+        logger.info(f"[Inference Success] Upload {upload.id}")
 
     except Exception as e:
-        logger.error(f"Inference failed for upload {upload_id}: {str(e)}")
+        logger.error(f"[Inference Error] Upload {upload_id}: {str(e)}")
 
-        upload = Upload.objects.filter(id=upload_id).first()
-        if upload:
+        try:
             upload.status = "failed"
             upload.save(update_fields=["status"])
+        except Exception as db_error:
+            logger.critical(f"[Inference Critical] Failed to update status: {str(db_error)}")
 
-        raise self.retry(exc=e)
+        # Retry only for transient issues
+        raise e
