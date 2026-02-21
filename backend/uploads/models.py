@@ -59,6 +59,11 @@ class Upload(models.Model):
         self.deleted_at = timezone.now()
         self.save(update_fields=["is_deleted", "deleted_at"])
 
+    def restore(self):
+        self.is_deleted = False
+        self.deleted_at = None
+        self.save(update_fields=["is_deleted", "deleted_at"])
+
     def __str__(self):
         return f"Upload {self.id} - {self.owner.username}"
 

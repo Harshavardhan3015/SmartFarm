@@ -19,11 +19,11 @@ class UploadViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         user = self.request.user
 
+        # 🛡 Admin sees ALL uploads (including deleted)
         if user.role == "admin":
-            return Upload.objects.filter(
-                is_deleted=False
-            ).order_by("-created_at")
+            return Upload.objects.all().order_by("-created_at")
 
+        # 👤 Farmers see only their non-deleted uploads
         return Upload.objects.filter(
             owner=user,
             is_deleted=False
@@ -41,6 +41,13 @@ class UploadViewSet(viewsets.ModelViewSet):
             {"detail": "You do not have permission to delete this upload."},
             status=status.HTTP_403_FORBIDDEN,
         )
+
+    # 🔥 Restore endpoint (Admin only)
+    @action(detail=True, methods=["post"], permission_classes=[IsAuthenticated, IsAdminRole])
+    def restore(self, request, pk=None):
+        upload = self.get_object()
+        upload.restore()
+        return Response({"detail": "Upload restored."})
 
     # -----------------------------
     # RUN INFERENCE
