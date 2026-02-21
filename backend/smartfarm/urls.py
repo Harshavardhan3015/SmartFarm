@@ -23,6 +23,7 @@ schema_view = get_schema_view(
     ),
     public=settings.DEBUG,
     permission_classes=[swagger_permission],
+    authentication_classes=[],
 )
 
 urlpatterns = [
