@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Django
+db.sqlite3
+*.log
+
+# Environment
+venv/
+.env
+
+# Media files (optional if local only)
+media/
+
+echo "*.sqlite3" >> .gitignore
+echo "*.log" >> .gitignore
+echo "__pycache__/" >> .gitignore
+echo "*.pyc" >> .gitignore
