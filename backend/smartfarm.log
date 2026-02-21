@@ -94,3 +94,129 @@
 [INFO] 2026-02-21 12:40:37,672 django.server "GET /admin/jsi18n/ HTTP/1.1" 200 3342
 [INFO] 2026-02-21 12:42:40,266 django.server "GET /admin/ HTTP/1.1" 200 7187
 [INFO] 2026-02-21 12:43:07,122 django.server "GET /admin/ HTTP/1.1" 200 7187
+[INFO] 2026-02-21 13:34:04,793 django.utils.autoreload Watching for file changes with StatReloader
+[ERROR] 2026-02-21 13:36:02,513 django.security.DisallowedHost Invalid HTTP_HOST header: '10.27.151.133:8000'. You may need to add '10.27.151.133' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "C:\Users\Aishw\AppData\Local\Programs\Python\Python310\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\Aishw\AppData\Local\Programs\Python\Python310\lib\site-packages\django\utils\deprecation.py", line 119, in __call__
+    response = self.process_request(request)
+  File "C:\Users\Aishw\AppData\Local\Programs\Python\Python310\lib\site-packages\django\middleware\common.py", line 48, in process_request
+    host = request.get_host()
+  File "C:\Users\Aishw\AppData\Local\Programs\Python\Python310\lib\site-packages\django\http\request.py", line 202, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '10.27.151.133:8000'. You may need to add '10.27.151.133' to ALLOWED_HOSTS.
+[WARNING] 2026-02-21 13:36:02,522 django.server "POST /api/auth/login/ HTTP/1.1" 400 73684
+[ERROR] 2026-02-21 13:36:20,570 django.security.DisallowedHost Invalid HTTP_HOST header: '10.27.151.133:8000'. You may need to add '10.27.151.133' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "C:\Users\Aishw\AppData\Local\Programs\Python\Python310\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\Aishw\AppData\Local\Programs\Python\Python310\lib\site-packages\django\utils\deprecation.py", line 119, in __call__
+    response = self.process_request(request)
+  File "C:\Users\Aishw\AppData\Local\Programs\Python\Python310\lib\site-packages\django\middleware\common.py", line 48, in process_request
+    host = request.get_host()
+  File "C:\Users\Aishw\AppData\Local\Programs\Python\Python310\lib\site-packages\django\http\request.py", line 202, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '10.27.151.133:8000'. You may need to add '10.27.151.133' to ALLOWED_HOSTS.
+[WARNING] 2026-02-21 13:36:20,572 django.server "POST /api/auth/login/ HTTP/1.1" 400 73684
+[ERROR] 2026-02-21 13:36:37,931 django.security.DisallowedHost Invalid HTTP_HOST header: '10.27.151.133:8000'. You may need to add '10.27.151.133' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "C:\Users\Aishw\AppData\Local\Programs\Python\Python310\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\Aishw\AppData\Local\Programs\Python\Python310\lib\site-packages\django\utils\deprecation.py", line 119, in __call__
+    response = self.process_request(request)
+  File "C:\Users\Aishw\AppData\Local\Programs\Python\Python310\lib\site-packages\django\middleware\common.py", line 48, in process_request
+    host = request.get_host()
+  File "C:\Users\Aishw\AppData\Local\Programs\Python\Python310\lib\site-packages\django\http\request.py", line 202, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '10.27.151.133:8000'. You may need to add '10.27.151.133' to ALLOWED_HOSTS.
+[WARNING] 2026-02-21 13:36:37,935 django.server "POST /api/auth/login/ HTTP/1.1" 400 73684
+[ERROR] 2026-02-21 13:36:54,820 django.security.DisallowedHost Invalid HTTP_HOST header: '10.27.151.133:8000'. You may need to add '10.27.151.133' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "C:\Users\Aishw\AppData\Local\Programs\Python\Python310\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\Aishw\AppData\Local\Programs\Python\Python310\lib\site-packages\django\utils\deprecation.py", line 119, in __call__
+    response = self.process_request(request)
+  File "C:\Users\Aishw\AppData\Local\Programs\Python\Python310\lib\site-packages\django\middleware\common.py", line 48, in process_request
+    host = request.get_host()
+  File "C:\Users\Aishw\AppData\Local\Programs\Python\Python310\lib\site-packages\django\http\request.py", line 202, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '10.27.151.133:8000'. You may need to add '10.27.151.133' to ALLOWED_HOSTS.
+[WARNING] 2026-02-21 13:36:54,822 django.server "POST /api/auth/signup/ HTTP/1.1" 400 73667
+[ERROR] 2026-02-21 13:36:59,232 django.security.DisallowedHost Invalid HTTP_HOST header: '10.27.151.133:8000'. You may need to add '10.27.151.133' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "C:\Users\Aishw\AppData\Local\Programs\Python\Python310\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\Aishw\AppData\Local\Programs\Python\Python310\lib\site-packages\django\utils\deprecation.py", line 119, in __call__
+    response = self.process_request(request)
+  File "C:\Users\Aishw\AppData\Local\Programs\Python\Python310\lib\site-packages\django\middleware\common.py", line 48, in process_request
+    host = request.get_host()
+  File "C:\Users\Aishw\AppData\Local\Programs\Python\Python310\lib\site-packages\django\http\request.py", line 202, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '10.27.151.133:8000'. You may need to add '10.27.151.133' to ALLOWED_HOSTS.
+[WARNING] 2026-02-21 13:36:59,234 django.server "POST /api/auth/signup/ HTTP/1.1" 400 73667
+[ERROR] 2026-02-21 13:37:07,653 django.security.DisallowedHost Invalid HTTP_HOST header: '10.27.151.133:8000'. You may need to add '10.27.151.133' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "C:\Users\Aishw\AppData\Local\Programs\Python\Python310\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\Aishw\AppData\Local\Programs\Python\Python310\lib\site-packages\django\utils\deprecation.py", line 119, in __call__
+    response = self.process_request(request)
+  File "C:\Users\Aishw\AppData\Local\Programs\Python\Python310\lib\site-packages\django\middleware\common.py", line 48, in process_request
+    host = request.get_host()
+  File "C:\Users\Aishw\AppData\Local\Programs\Python\Python310\lib\site-packages\django\http\request.py", line 202, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '10.27.151.133:8000'. You may need to add '10.27.151.133' to ALLOWED_HOSTS.
+[WARNING] 2026-02-21 13:37:07,655 django.server "POST /api/auth/signup/ HTTP/1.1" 400 73667
+[ERROR] 2026-02-21 13:37:30,282 django.security.DisallowedHost Invalid HTTP_HOST header: '10.27.151.133:8000'. You may need to add '10.27.151.133' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "C:\Users\Aishw\AppData\Local\Programs\Python\Python310\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\Aishw\AppData\Local\Programs\Python\Python310\lib\site-packages\django\utils\deprecation.py", line 119, in __call__
+    response = self.process_request(request)
+  File "C:\Users\Aishw\AppData\Local\Programs\Python\Python310\lib\site-packages\django\middleware\common.py", line 48, in process_request
+    host = request.get_host()
+  File "C:\Users\Aishw\AppData\Local\Programs\Python\Python310\lib\site-packages\django\http\request.py", line 202, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '10.27.151.133:8000'. You may need to add '10.27.151.133' to ALLOWED_HOSTS.
+[WARNING] 2026-02-21 13:37:30,286 django.server "POST /api/auth/signup/ HTTP/1.1" 400 73667
+[ERROR] 2026-02-21 13:38:29,138 django.security.DisallowedHost Invalid HTTP_HOST header: '10.27.151.133:8000'. You may need to add '10.27.151.133' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "C:\Users\Aishw\AppData\Local\Programs\Python\Python310\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\Aishw\AppData\Local\Programs\Python\Python310\lib\site-packages\django\utils\deprecation.py", line 119, in __call__
+    response = self.process_request(request)
+  File "C:\Users\Aishw\AppData\Local\Programs\Python\Python310\lib\site-packages\django\middleware\common.py", line 48, in process_request
+    host = request.get_host()
+  File "C:\Users\Aishw\AppData\Local\Programs\Python\Python310\lib\site-packages\django\http\request.py", line 202, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '10.27.151.133:8000'. You may need to add '10.27.151.133' to ALLOWED_HOSTS.
+[WARNING] 2026-02-21 13:38:29,142 django.server "POST /api/auth/login/ HTTP/1.1" 400 73684
+[ERROR] 2026-02-21 13:38:45,420 django.security.DisallowedHost Invalid HTTP_HOST header: '10.27.151.133:8000'. You may need to add '10.27.151.133' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "C:\Users\Aishw\AppData\Local\Programs\Python\Python310\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\Aishw\AppData\Local\Programs\Python\Python310\lib\site-packages\django\utils\deprecation.py", line 119, in __call__
+    response = self.process_request(request)
+  File "C:\Users\Aishw\AppData\Local\Programs\Python\Python310\lib\site-packages\django\middleware\common.py", line 48, in process_request
+    host = request.get_host()
+  File "C:\Users\Aishw\AppData\Local\Programs\Python\Python310\lib\site-packages\django\http\request.py", line 202, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '10.27.151.133:8000'. You may need to add '10.27.151.133' to ALLOWED_HOSTS.
+[WARNING] 2026-02-21 13:38:45,422 django.server "POST /api/auth/login/ HTTP/1.1" 400 73684
+[INFO] 2026-02-21 13:39:00,381 django.utils.autoreload C:\Users\Aishw\OneDrive\Desktop\SmartFarm\backend\smartfarm\settings.py changed, reloading.
+[INFO] 2026-02-21 13:39:04,589 django.utils.autoreload Watching for file changes with StatReloader
+[INFO] 2026-02-21 13:39:09,946 django.utils.autoreload C:\Users\Aishw\OneDrive\Desktop\SmartFarm\backend\smartfarm\settings.py changed, reloading.
+[INFO] 2026-02-21 13:39:12,447 django.utils.autoreload Watching for file changes with StatReloader
+[INFO] 2026-02-21 13:39:17,012 django.utils.autoreload C:\Users\Aishw\OneDrive\Desktop\SmartFarm\backend\users\views.py changed, reloading.
+[INFO] 2026-02-21 13:39:19,524 django.utils.autoreload Watching for file changes with StatReloader
+[INFO] 2026-02-21 13:39:36,467 django.utils.autoreload Watching for file changes with StatReloader
+[WARNING] 2026-02-21 13:41:19,851 django.request Unauthorized: /api/auth/login/
+[WARNING] 2026-02-21 13:41:19,854 django.server "POST /api/auth/login/ HTTP/1.1" 401 63
+[INFO] 2026-02-21 13:41:43,644 django.server "POST /api/auth/signup/ HTTP/1.1" 201 39
+[INFO] 2026-02-21 13:42:00,318 django.server "POST /api/auth/login/ HTTP/1.1" 200 489
+[WARNING] 2026-02-21 13:42:12,242 django.request Unauthorized: /api/auth/login/
+[WARNING] 2026-02-21 13:42:12,243 django.server "POST /api/auth/login/ HTTP/1.1" 401 63
+[WARNING] 2026-02-21 13:42:39,632 django.request Unauthorized: /api/auth/login/
+[WARNING] 2026-02-21 13:42:39,633 django.server "POST /api/auth/login/ HTTP/1.1" 401 63
+[WARNING] 2026-02-21 13:42:59,345 django.request Bad Request: /api/auth/signup/
+[WARNING] 2026-02-21 13:42:59,346 django.server "POST /api/auth/signup/ HTTP/1.1" 400 58

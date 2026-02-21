@@ -14,7 +14,7 @@ SECRET_KEY = 'django-insecure--v0w=c9al@9yhl0ejm^xlf=6q-kv%3(55!pve2h!%e-qa*12%2
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*', '10.27.151.133', 'localhost', '127.0.0.1']
 
 # -------------------------------------------------
 # APPLICATIONS
@@ -148,6 +148,24 @@ SIMPLE_JWT = {
 # CORS
 # -------------------------------------------------
 CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+    "http://10.27.151.133:3000",
+    "http://10.27.151.133:8000",
+]
+CORS_ALLOW_HEADERS = [
+    'accept',
+    'accept-encoding',
+    'authorization',
+    'content-type',
+    'dnt',
+    'origin',
+    'user-agent',
+    'x-csrftoken',
+    'x-requested-with',
+]
 
 # -------------------------------------------------
 # SWAGGER
