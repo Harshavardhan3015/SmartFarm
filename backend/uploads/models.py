@@ -15,6 +15,7 @@ class Upload(models.Model):
     file = models.FileField(upload_to="uploads/%Y/%m/%d/")
     upload_type = models.CharField(max_length=20, choices=UPLOAD_TYPES, default="image")
     status = models.CharField(max_length=20, default="pending")
+    is_public = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
