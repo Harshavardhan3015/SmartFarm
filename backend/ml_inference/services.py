@@ -8,17 +8,15 @@ from uploads.models import Upload, InferenceResult
 def run_inference_on_image(upload: Upload) -> InferenceResult:
     """
     Run inference on a single image upload.
-    Handles status update and result creation.
+    Only handles ML logic + result creation.
+    Status management handled by Celery task.
     """
+
     if upload.upload_type != "image":
         raise ValueError("Inference supported only for image uploads.")
 
     if upload.status == "done":
         raise ValueError("Inference already completed.")
-
-    # Mark as processing
-    upload.status = "processing"
-    upload.save()
 
     try:
         # MOCKED ML LOGIC
@@ -32,7 +30,6 @@ def run_inference_on_image(upload: Upload) -> InferenceResult:
             ],
         }
 
-        # Save inference result
         inf = InferenceResult.objects.create(
             upload=upload,
             disease=result["disease"],
