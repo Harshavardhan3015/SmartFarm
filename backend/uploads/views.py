@@ -12,22 +12,11 @@ from uploads.tasks import run_inference
 
 
 class UploadViewSet(viewsets.ModelViewSet):
-    """
-    /api/uploads/
-    /api/uploads/{id}/
-    /api/uploads/{id}/run_inference/
-    /api/uploads/{id}/approve/
-    """
-
     serializer_class = UploadSerializer
     parser_classes = (MultiPartParser, FormParser)
     permission_classes = [IsAuthenticated, IsOwnerOrReadOnly]
 
     def get_queryset(self):
-        """
-        Farmers see only their uploads.
-        Admins see all uploads.
-        """
         user = self.request.user
 
         if user.role == "admin":
@@ -45,15 +34,15 @@ class UploadViewSet(viewsets.ModelViewSet):
     def run_inference(self, request, pk=None):
         upload = self.get_object()
 
-        if upload.status == "processing":
+        if upload.status in ["processing"]:
             return Response(
                 {"detail": "Inference already in progress.", "status": upload.status},
                 status=status.HTTP_202_ACCEPTED,
             )
 
-        if upload.status == "done":
+        if upload.status in ["done", "approved"]:
             try:
-                result = upload.inferenceresult
+                result = upload.inference
                 return Response(
                     InferenceResultSerializer(result).data,
                     status=status.HTTP_200_OK,
@@ -61,18 +50,25 @@ class UploadViewSet(viewsets.ModelViewSet):
             except Exception:
                 return Response(
                     {
-                        "detail": "Inference already completed but result missing.",
+                        "detail": "Inference completed but result missing.",
                         "status": upload.status,
                     },
                     status=status.HTTP_500_INTERNAL_SERVER_ERROR,
                 )
 
+        if upload.status == "failed":
+            # allow retry
+            run_inference.delay(upload.id)
+            return Response(
+                {"detail": "Retrying inference.", "status": "processing"},
+                status=status.HTTP_202_ACCEPTED,
+            )
+
+        # pending case
         run_inference.delay(upload.id)
-        upload.status = "processing"
-        upload.save()
 
         return Response(
-            {"detail": "Inference started in background.", "status": upload.status},
+            {"detail": "Inference started in background.", "status": "processing"},
             status=status.HTTP_202_ACCEPTED,
         )
 
@@ -88,9 +84,9 @@ class UploadViewSet(viewsets.ModelViewSet):
             "status": upload.status,
         }
 
-        if upload.status == "done":
+        if upload.status in ["done", "approved"]:
             try:
-                result = upload.inferenceresult
+                result = upload.inference
                 response["result"] = InferenceResultSerializer(result).data
             except Exception:
                 response["result"] = None
@@ -106,9 +102,6 @@ class UploadViewSet(viewsets.ModelViewSet):
         permission_classes=[IsAuthenticated, IsAdminRole],
     )
     def approve(self, request, pk=None):
-        """
-        Only admin can approve an upload and make it public.
-        """
         upload = self.get_object()
 
         if upload.status != "done":
@@ -119,7 +112,7 @@ class UploadViewSet(viewsets.ModelViewSet):
 
         upload.is_public = True
         upload.status = "approved"
-        upload.save()
+        upload.save(update_fields=["is_public", "status"])
 
         return Response(
             {"detail": "Upload approved and published to marketplace."},

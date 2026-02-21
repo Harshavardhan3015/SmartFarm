@@ -7,35 +7,43 @@ from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 
+from .health import health_check
+
+
+# Swagger Permissions Based on Environment
+swagger_permission = (
+    permissions.AllowAny if settings.DEBUG else permissions.IsAdminUser
+)
 
 schema_view = get_schema_view(
     openapi.Info(
         title="SmartFarm API",
-        default_version='v1',
+        default_version="v1",
         description="SmartFarm Backend API Documentation",
     ),
-    public=True,
-    permission_classes=[permissions.AllowAny],
+    public=settings.DEBUG,
+    permission_classes=[swagger_permission],
 )
 
-
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path("admin/", admin.site.urls),
+
+    # Health Check
+    path("api/health/", health_check),
 
     # Auth APIs
-    path('api/auth/', include('users.urls')),
+    path("api/auth/", include("users.urls")),
 
     # Upload APIs
-    path('api/', include('uploads.urls')),
+    path("api/", include("uploads.urls")),
 
     # Marketplace APIs
-    path('api/marketplace/', include('marketplace.urls')),
+    path("api/marketplace/", include("marketplace.urls")),
 
-    # Swagger UI
-    re_path(r'^swagger/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
-    re_path(r'^redoc/$', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
+    # Swagger
+    re_path(r"^swagger/$", schema_view.with_ui("swagger", cache_timeout=0), name="schema-swagger-ui"),
+    re_path(r"^redoc/$", schema_view.with_ui("redoc", cache_timeout=0), name="schema-redoc"),
 ]
 
-# Media files
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
