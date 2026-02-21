@@ -1,44 +1,60 @@
 from django.db import models
-from django.contrib.auth import get_user_model
-from django.contrib.auth.models import User
-
-User = get_user_model()
+from django.conf import settings
 
 
 class Upload(models.Model):
-    UPLOAD_TYPES = (
+
+    UPLOAD_TYPE_CHOICES = [
         ("image", "Image"),
         ("document", "Document"),
+    ]
+
+    STATUS_CHOICES = [
+        ("pending", "Pending"),
+        ("processing", "Processing"),
+        ("done", "Done"),
+        ("approved", "Approved"),
+        ("failed", "Failed"),
+    ]
+
+    owner = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name="uploads",
     )
 
-    owner = models.ForeignKey(User, on_delete=models.CASCADE)
     file = models.FileField(upload_to="uploads/%Y/%m/%d/")
-    upload_type = models.CharField(max_length=20, choices=UPLOAD_TYPES, default="image")
-    status = models.CharField(max_length=20, default="pending")
+    upload_type = models.CharField(
+        max_length=20,
+        choices=UPLOAD_TYPE_CHOICES,
+        default="image",
+    )
+
+    status = models.CharField(
+        max_length=20,
+        choices=STATUS_CHOICES,
+        default="pending",
+    )
+
     is_public = models.BooleanField(default=False)
+
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.owner} - {self.file.name} - {self.status}"
+        return f"Upload {self.id} - {self.owner.username}"
 
 
 class InferenceResult(models.Model):
     upload = models.OneToOneField(
-        Upload, on_delete=models.CASCADE, related_name="inference"
+        Upload,
+        on_delete=models.CASCADE,
+        related_name="inference",
     )
+
     disease = models.CharField(max_length=200)
     confidence = models.FloatField()
-    # list of text suggestions, e.g. ["Spray organic fungicide", "Avoid overwatering"]
     suggested_actions = models.JSONField(default=list)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.disease} ({self.confidence:.2f})"
-    
-class CropImage(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='crop_images/')
-    uploaded_at = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return f"{self.user.username} - {self.uploaded_at}"
+        return f"Inference for Upload {self.upload.id}"
