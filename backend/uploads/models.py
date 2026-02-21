@@ -2,6 +2,10 @@ from django.db import models
 from django.conf import settings
 
 
+from django.db import models
+from django.conf import settings
+
+
 class Upload(models.Model):
 
     UPLOAD_TYPE_CHOICES = [
@@ -40,10 +44,18 @@ class Upload(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True)
 
+    class Meta:
+        ordering = ["-created_at"]
+        indexes = [
+            models.Index(fields=["owner"]),
+            models.Index(fields=["status"]),
+            models.Index(fields=["created_at"]),
+        ]
+
     def __str__(self):
         return f"Upload {self.id} - {self.owner.username}"
 
-
+        
 class InferenceResult(models.Model):
     upload = models.OneToOneField(
         Upload,
